@@ -14,46 +14,8 @@ public class doggyMaker {
     public String newHairColor;
     public String newEyeColor;
 
-
-    // Draw
-    public void draw() {
-        // Makes the draw frame
-        JFrame frame = new JFrame("Draw");
-
-        // All of the text labels
-        JLabel nameLabel = new JLabel();
-        JLabel eyeColorLabel = new JLabel();
-        JLabel hairColorLabel = new JLabel();
-        JLabel ageLabel = new JLabel();
-
-        // Container for the labels
-        JPanel labelCont = new JPanel();
-
-        // Adding labels to the container
-        labelCont.add(nameLabel);
-        labelCont.add(hairColorLabel);
-        labelCont.add(eyeColorLabel);
-        labelCont.add(ageLabel);
-
-        // Postioning the label container
-        labelCont.setLayout(new BoxLayout(labelCont, BoxLayout.Y_AXIS));
-
-        // Frame settings
-        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        frame.setMinimumSize(new Dimension(500,500));
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(labelCont);
-        frame.setVisible(true);
-
-        // Setting the text of labels
-        nameLabel.setText("Name: " + nameStored);
-        eyeColorLabel.setText("Eye Color: " + eyeColorStored);
-        hairColorLabel.setText("Hair Color: " + hairColorStored);
-        ageLabel.setText("Age: " + ageStored);
-    }
-
     // Set
-    public String setName(String name) {
+    public String setDogName(String name) {
         nameStored = name;
         return nameStored;
     }

@@ -1,26 +1,18 @@
-public class main {
+import javax.swing.*;
+import java.awt.*;
+
+public class main extends JFrame{
     public static void main(String[] args) {
         doggyMaker Bob = new doggyMaker();
-        doggyMaker Jarvey = new doggyMaker();
-        doggyMaker Berry = new doggyMaker();
+        drawDog Jerry;
 
-        //Bob
-        Bob.setName("Bob");
-        Bob.setHairColor("White");
-        Bob.setEyeColor("Green");
-        Bob.setAge(7);
+        // DoggyMaker
+        Bob.setDogName("Bob");
+        System.out.print(Bob.getName());
 
-        //Jarvey
-
-        Jarvey.setAll("Jarvey", "Brown", "Blue",7);
-
-        //Make Berry Traits Randomly
-        Berry.setMate(Bob.getHairColor(), Jarvey.getHairColor(), Bob.getEyeColor(), Jarvey.getEyeColor(), Berry.getName());
-
-        //Berry
-        Berry.setAll("Berry", Berry.getMateHairColor(), Berry.getMateEyeColor(), 1);
-
-        Jarvey.draw();
-        Bob.draw();
+        // DrawDog
+        Jerry = new drawDog();
+        Jerry.setDogName("Jerry");
+        Jerry.setHairColor(Color.darkGray);
     }
 }
