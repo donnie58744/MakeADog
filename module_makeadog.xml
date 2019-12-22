@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_makeadog" default="compile.module.makeadog">
+  <dirname property="module.makeadog.basedir" file="${ant.file.module_makeadog}"/>
+  
+  <property name="module.jdk.home.makeadog" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.makeadog" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.makeadog" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.makeadog" value="-encoding UTF-8 -source 8 -target 8 ${compiler.args}"/>
+  
+  <property name="makeadog.output.dir" value="${module.makeadog.basedir}/out/production/MakeADog"/>
+  <property name="makeadog.testoutput.dir" value="${module.makeadog.basedir}/out/test/MakeADog"/>
+  
+  <path id="makeadog.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="makeadog.module.production.classpath">
+    <path refid="${module.jdk.classpath.makeadog}"/>
+  </path>
+  
+  <path id="makeadog.runtime.production.module.classpath">
+    <pathelement location="${makeadog.output.dir}"/>
+  </path>
+  
+  <path id="makeadog.module.classpath">
+    <path refid="${module.jdk.classpath.makeadog}"/>
+    <pathelement location="${makeadog.output.dir}"/>
+  </path>
+  
+  <path id="makeadog.runtime.module.classpath">
+    <pathelement location="${makeadog.testoutput.dir}"/>
+    <pathelement location="${makeadog.output.dir}"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.makeadog">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.makeadog">
+    <patternset refid="excluded.from.module.makeadog"/>
+  </patternset>
+  
+  <path id="makeadog.module.sourcepath">
+    <dirset dir="${module.makeadog.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.makeadog" depends="compile.module.makeadog.production,compile.module.makeadog.tests" description="Compile module MakeADog"/>
+  
+  <target name="compile.module.makeadog.production" depends="register.custom.compilers" description="Compile module MakeADog; production classes">
+    <mkdir dir="${makeadog.output.dir}"/>
+    <javac2 destdir="${makeadog.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.makeadog}/javac">
+      <compilerarg line="${compiler.args.makeadog}"/>
+      <bootclasspath refid="makeadog.module.bootclasspath"/>
+      <classpath refid="makeadog.module.production.classpath"/>
+      <src refid="makeadog.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.makeadog"/>
+    </javac2>
+    
+    <copy todir="${makeadog.output.dir}">
+      <fileset dir="${module.makeadog.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.makeadog.tests" depends="register.custom.compilers,compile.module.makeadog.production" description="compile module MakeADog; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.makeadog" description="cleanup module">
+    <delete dir="${makeadog.output.dir}"/>
+    <delete dir="${makeadog.testoutput.dir}"/>
+  </target>
+</project>
